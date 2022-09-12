@@ -1,0 +1,76 @@
+//To interface LDR sensor with Arduino and write a program to 
+//a)	turn ON LED at sensor detection (Analog) and print on serial monitor.
+//b)	turn ON three LEDS according to varying intensity of light (Analog)
+//c)	turn ON LED at sensor detection (Digital)
+
+//a.)
+void setup() {
+Serial.begin(9600); 
+pinMode (13, OUTPUT);
+}
+
+unsigned int AnalogValue = 0;
+void loop() {
+  AnalogValue = analogRead(A0); 
+  Serial.println (AnalogValue);
+  if (AnalogValue >=341)
+  {
+    digitalWrite (13, HIGH);
+  }
+  else
+  {
+   digitalWrite(13, LOW); 
+  }
+}
+
+//b.)
+void setup() {
+  Serial.begin(9600);
+  pinMode (13, OUTPUT);
+  pinMode (12, OUTPUT);
+  pinMode (11, OUTPUT);
+}
+unsigned int AnalogValue = 0;
+void loop() {
+AnalogValue = analogRead (A0);
+Serial.println (AnalogValue); 
+if (AnalogValue >=341)
+{
+digitalWrite(13,HIGH);
+digitalWrite(12, LOW);
+digitalWrite(11,LOW);
+}
+else if( AnalogValue>=341 and AnalogValue <=550)
+{
+digitalWrite(13, HIGH);
+digitalWrite(12, HIGH); 
+digitalWrite(11, LOW);
+}
+else
+{
+  digitalWrite (13, HIGH); 
+digitalWrite(12, HIGH); 
+digitalWrite(11, HIGH);
+}
+}
+//c.)
+void setup() {
+Serial.begin(9600); 
+pinMode (9, INPUT); 
+pinMode (13, OUTPUT);
+}
+unsigned int DigitalValue = 0; 
+void loop() {
+DigitalValue = digitalRead (9); 
+Serial.println (DigitalValue); 
+if (DigitalValue == HIGH)
+{
+  digitalWrite(13, HIGH);
+}
+else
+{
+  digitalWrite(13, LOW);
+}
+}
+
+
