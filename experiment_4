@@ -1,0 +1,58 @@
+// exp 4
+// To interface Bluetooth with Arduino and 
+// a) write a program to turn LED ON/OFF when ‘1’/’0’ is received from smartphone using Bluetooth. 
+// b) write a program to send sensor data to smartphone using Bluetooth.
+
+// a.)
+char data; //Variable to store the data //Declaring the LED pin
+void setup() {
+Serial.begin(9600);
+pinMode (2, OUTPUT);
+pinMode (3, OUTPUT);
+pinMode (4, OUTPUT); 
+}
+void loop(){
+  if (Serial.available())
+  {
+    data = Serial.read();
+    Serial.print(data);
+  }
+if (data =="0"){
+digitalWrite(2, HIGH);
+digitalWrite(3, LOW);
+digitalWrite(4, LOW);
+}
+else if (data == "1"){
+ digitalWrite(2, LOW);
+digitalWrite(3, HIGH);
+digitalWrite(4, LOW);
+}
+else if (data== "3")
+{
+digitalWrite(2, LOW);
+digitalWrite(3, LOW);
+digitalWrite(4, HIGH); 
+}
+delay(1000);
+}
+
+// b.)
+#include <SimpleDHT.h>
+#include <SoftwareSerial.h>
+SoftwareSerial bt (0, 1); // RX, TX
+SimpleDHT11 DHT;
+byte temp;
+byte hum;
+void setup() {
+Serial.begin(9600);
+pinMode(2, INPUT);
+Serial.println("Ready");
+}
+void loop() { 
+int readData=DHT.read(2,&temp,&hum,NULL);
+Serial.print(temp);
+Serial.print(":");
+Serial.print (hum);
+Serial.println(":");
+delay(1000);
+}
