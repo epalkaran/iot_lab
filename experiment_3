@@ -1,0 +1,40 @@
+// exp 3
+// a) To interface DHT11 sensor with Arduino and write a program to print temperature and humidity readings.
+// b) write a program to turn ON led according to certain conditions.
+
+a.)
+#include<SimpleDHT.h>
+SimpleDHT11 dht;
+void setup() {
+  Serial.begin(9600);
+  pinMode(13, INPUT);
+  pinMode(12, OUTPUT);
+  pinMode(11, OUTPUT);
+}
+byte temperature;
+byte humidity;
+void loop() {
+  dht.read(13,&temperature,&humidity,NULL);
+  if(temperature >=25)
+  {
+    digitalWrite(12, HIGH);
+  }
+  else
+  {
+    digitalWrite(12, LOW);
+  }
+  if(humidity >70)
+  {
+    digitalWrite(11, HIGH);
+  }
+  else
+  {
+    digitalWrite(11, LOW);
+  }
+  Serial.print("Current humidity = ");
+  Serial.println(humidity);
+  Serial.print("Current temperature = ");
+  Serial.println(temperature);
+  
+  delay(1000);                       // wait for a second
+}
