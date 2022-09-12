@@ -1,0 +1,61 @@
+// To interface LED with Arduino and write a program to 
+// a)	turn ON LED for 1 sec after every 2 seconds
+// b)	turn ON two LEDS and blink them alternatively
+// c)	turn ON two LEDS and blink them alternatively using push button
+
+// a.)
+
+void setup() {
+
+pinMode (13, OUTPUT);
+
+}
+
+void loop() {
+digitalWrite(13, HIGH); 
+delay(1000);
+digitalWrite(13, LOW); 
+delay(1000);
+
+}
+
+// b.)
+
+void setup() {
+pinMode (13, OUTPUT);
+pinMode (12, OUTPUT);
+}
+
+void loop()
+{
+digitalWrite(13, HIGH);
+digitalWrite(12, LOW); // turn the LED on (HIGH is the voltage level)
+delay(2000);
+digitalWrite(13, LOW);
+digitalWrite(12, HIGH); // turn the LED off by making the voltage LOW
+delay(2000);
+}
+
+//c.
+void setup(){
+pinMode (13, OUTPUT);
+pinMode (12, OUTPUT);
+pinMode (11, INPUT);
+}
+int buttonstate = 0;
+void loop(){ 
+  buttonstate = digitalRead(11); 
+if(buttonstate== HIGH)
+{
+  digitalWrite(13, HIGH);
+  digitalWrite(12, LOW);
+}
+else
+{
+  digitalWrite(13, LOW);
+  digitalWrite(12, HIGH);
+}
+
+}
+
+
